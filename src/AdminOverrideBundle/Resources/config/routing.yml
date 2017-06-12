@@ -1,0 +1,3 @@
+admin_override_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AdminOverrideBundle:Default:index }

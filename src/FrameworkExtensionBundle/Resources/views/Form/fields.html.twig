@@ -1,0 +1,36 @@
+{#
+    Template for the file field extension, used to display uploaded images.
+    Available variables:
+        - image_url;
+        - image_style;
+#}
+
+{% extends 'form_div_layout.html.twig' %}
+
+{% block file_widget %}
+    {% spaceless %}
+    {% if image_url is not null %}
+        {% if image_style is not null %}
+            <img src="{{ image_url | imagine_filter(image_style) }}" class="image-form"/>
+        {% else %}
+            <img src="{{ asset (image_url) }}" />
+        {% endif %}
+    {% endif %}
+    {{ block ('form_widget') }}
+
+    {% if file_path is not null and file_name is not null%}
+        <i>{{'Documentul deja existent:'|trans}} <a target="_blank" href="{{ asset(file_path) }}">{{ file_name }}</a></i>
+    {% endif %}
+
+    {% endspaceless %}
+{% endblock %}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+    <label class="error on">
+        {%- for error in errors -%}
+            <span>{{ error.message }}</span>
+        {%- endfor -%}
+    </label>
+    {%- endif -%}
+{%- endblock form_errors -%}

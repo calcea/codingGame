@@ -1,0 +1,30 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <div class="panel-title">{{ 'Inregisrare' }}</div>
+        </div>
+
+        <div style="padding-top:30px" class="panel-body">
+
+            <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+
+                {{ form_row (form.email, { attr : { class :"form-control" } }) }}
+
+                {{ form_row (form.username, { attr : { class :"form-control" } }) }}
+
+                {{ form_row (form.plainPassword.first, { attr : { class :"form-control" } } )}}
+
+                {{ form_row (form.plainPassword.second, { attr : { class :"form-control" } } )}}
+
+                <div class="col-sm-12 controls" style="padding-top:15px">
+                    <input class="form-control btn btn-danger" type="submit" id="_submit" name="_submit"
+                           value="Inregistrare"/>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+

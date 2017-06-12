@@ -1,0 +1,32 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div id="reset-password" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <div class="panel-title">{{ 'Reset password'|trans }}</div>
+        </div>
+
+        <div style="padding-top:30px" class="panel-body">
+
+            {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+
+
+            {% if not form.vars.valid %}
+                <div class="errors alert alert-danger" role="alert">
+                    {{ form_errors(form.plainPassword.first) }}
+                </div>
+            {% endif %}
+
+            {{ form_label(form.plainPassword.first) }}
+            {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', placeholder : 'New password' }}) }}
+
+            {{ form_label(form.plainPassword.second) }}
+            {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', placeholder : 'Confirm new password'  }}) }}
+
+            <input type="submit" value="{{ 'resetting.reset.submit'|trans }}"
+                   class="reset-button form-control btn btn-danger pull-left"/>
+
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+</div>

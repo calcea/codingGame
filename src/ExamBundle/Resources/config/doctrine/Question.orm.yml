@@ -1,0 +1,38 @@
+ExamBundle\Entity\Question:
+    type:  entity
+    table: questions
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        question:
+            type: string
+            nullable: false
+        answer:
+            type: integer
+            nullable: false
+        score:
+            type: integer
+            nullable: false
+        option1:
+            type: string
+            nullable: false
+        option2:
+            type: string
+            nullable: false
+        option3:
+            type: string
+            nullable: false
+        option4:
+            type: string
+            nullable: false
+    manyToOne:
+        lesson:
+          targetEntity: LessonBundle\Entity\Lesson
+          inversedBy: questions
+          joinColumn:
+            name: lesson_id
+            referencedColumnName: id
+

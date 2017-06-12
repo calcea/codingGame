@@ -1,0 +1,38 @@
+ActivityBundle\Entity\Badge:
+    type: entity
+    table: badges
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        title:
+            type: string
+            nullable: false
+        logoUrl:
+            type: string
+            nullable: false
+        type:
+            type: smallint
+            nullable: false
+    manyToOne:
+         language:
+            targetEntity: LessonBundle\Entity\Language
+            inversedBy: badges
+            joinColumn:
+              name: language_id
+              referencedColumnName: id
+    manyToMany:
+        users:
+            targetEntity: UserBundle\Entity\User
+            inversedBy: badges
+            joinTable:
+                name: users_badges
+                joinColumns:
+                    badge_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    user_id:
+                        referencedColumnName: id

@@ -1,0 +1,12 @@
+user_bundle.edit_profile:
+    path:     /profile/edit
+    defaults: { _controller: UserBundle:Profile:edit }
+user_bundle.list_users:
+    path:     /utilizatori
+    defaults: { _controller: UserBundle:UserList:list }
+user_bundle.show_user:
+    path: /utilizatori/{slugName}/{id}
+    defaults: { _controller: UserBundle:UserList:show }
+user_bundle.show_ranking:
+    path: /clasament
+    defaults: { _controller: UserBundle:Ranking:showRanking }

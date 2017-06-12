@@ -1,0 +1,28 @@
+services:
+    lesson_bundle.language_admin:
+        class: LessonBundle\Admin\LanguageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content management", label: "Language" }
+        arguments:
+            - ~
+            - LessonBundle\Entity\Language
+            - ~
+        calls:
+            - [ setTranslationDomain, ["admin"]]
+            - [ addChild, ['@lesson_bundle.lesson_admin']]
+
+    lesson_bundle.lesson_admin:
+            class: LessonBundle\Admin\LessonAdmin
+            tags:
+                - { name: sonata.admin, manager_type: orm, group: "Content management", label: "Lesson" }
+            arguments:
+                - ~
+                - LessonBundle\Entity\Lesson
+                - ~
+            calls:
+                - [ setTranslationDomain, ["admin"]]
+                - [ addChild, ['@exam_bundle.question_admin']]
+    lesson_bundle.lesson_service:
+            class: LessonBundle\Services\LessonService
+            arguments: ['@doctrine', '@activity_bundle.services.activity_tracking', '@security.token_storage']
+

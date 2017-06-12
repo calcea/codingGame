@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+    <div id="reset-password" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">{{ 'Check email'|trans }}</div>
+            </div>
+
+            <div style="padding-top:30px" class="panel-body">
+                <div class="error-reset alert alert-danger" role="alert">
+                    {{ 'resetting.check_email'|trans({'%email%': email}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

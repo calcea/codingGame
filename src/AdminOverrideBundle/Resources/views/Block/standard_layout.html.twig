@@ -1,0 +1,14 @@
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets filter='cssrewrite'
+    'css/admin.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block sonata_sidebar_search %} {% endblock sonata_sidebar_search %}
+
+{% block side_bar_after_nav %} {% endblock %}

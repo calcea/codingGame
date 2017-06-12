@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+
+    <div class="languages-show-all main row">
+        {% for language in languages %}
+            <div class="col-md-3 images_1_of_4 text-center">
+                <a href="{{ path('lesson_bundle.show_language', { id: language.id, slugName: language.getName()|sonata_slugify }) }}">
+                    <img src="{{ asset(language.getLogoUrl) }}" width="150px" height="100px">
+                    <h4>{{ language.name }}</h4>
+                    <p class="para">{{ language.getLessons|length }} lectii</p>
+                    {% if scores is defined %}
+                        <p class="para">Parcurs: {{ scores[language.id]|number_format }} %</p>
+                    {% endif %}
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

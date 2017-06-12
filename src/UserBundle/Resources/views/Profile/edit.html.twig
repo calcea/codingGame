@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets filter='cssrewrite'
+    '@jquery_ui_style'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    <div id="editbox" style="margin-top:50px;" class="mainbox col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <div class="panel-title">Editeaza informatiile</div>
+            </div>
+
+            <div style="padding-top:30px" class="panel-body">
+
+                <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                {{ form_start(form, {'method': 'post', 'action': path('user_bundle.edit_profile'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+
+                {{ form_row (form.email, { attr : { class :"form-control" } }) }}
+
+                {{ form_row (form.username, { attr : { class :"form-control" } }) }}
+
+                {{ form_row (form.birthday, { attr : { class :"form-control" } } )}}
+
+                {{ form_row (form.avatar, { attr: { class :"form-control" }}) }}
+
+                <div class="col-sm-12 controls" style="padding-top:15px">
+                    <input class="form-control btn btn-danger" type="submit" id="_submit" name="_submit"
+                           value="{{ 'profile.edit.submit'|trans }}"/>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

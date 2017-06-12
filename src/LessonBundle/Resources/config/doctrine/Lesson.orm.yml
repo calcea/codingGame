@@ -1,0 +1,37 @@
+LessonBundle\Entity\Lesson:
+    type:  entity
+    table: lessons
+    repositoryClass: LessonBundle\Repository\LessonRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        title:
+            type: string
+            nullable: false
+        chapter:
+            type: integer
+            nullable: false
+        content:
+            type: text
+            nullable: false
+        score_to_unlock:
+            type: integer
+            nullable: true
+    manyToOne:
+        language:
+            targetEntity: LessonBundle\Entity\Language
+            inversedBy: lessons
+            joinColumn:
+              name: language_id
+              referencedColumnName: id
+    oneToMany:
+        questions:
+            targetEntity: ExamBundle\Entity\Question
+            mappedBy: lesson
+        activities:
+            targetEntity: ActivityBundle\Entity\UserActivity
+            mappedBy: lesson

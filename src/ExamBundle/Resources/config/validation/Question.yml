@@ -1,0 +1,16 @@
+ExamBundle\Entity\Question:
+    properties:
+        answer:
+            - NotBlank: ~
+        option1:
+            - NotBlank: ~
+        option2:
+            - NotBlank: ~
+        option3:
+            - NotBlank: ~
+        option4:
+            - NotBlank: ~
+        question:
+            - NotBlank: ~
+        score:
+            - NotBlank: ~

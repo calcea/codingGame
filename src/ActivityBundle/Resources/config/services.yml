@@ -1,0 +1,14 @@
+services:
+    activity_bundle.services.activity_tracking:
+        class: ActivityBundle\Services\ActivityTracking
+        arguments: ['@doctrine','@security.token_storage']
+    activity_bundle.badge_admin:
+        class: ActivityBundle\Admin\BadgeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content management", label: "Badge" }
+        arguments:
+            - ~
+            - ActivityBundle\Entity\Badge
+            - ~
+        calls:
+            - [ setTranslationDomain, ["admin"]]

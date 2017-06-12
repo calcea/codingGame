@@ -1,0 +1,24 @@
+parameters:
+    # The application's public files directory.
+    public_dir: %kernel.root_dir%/../web
+
+services:
+    framework_extension.path_manager:
+        class: FrameworkExtensionBundle\Filesystem\PathManager
+        arguments: [%public_dir%]
+
+    framework_extension.upload_manager:
+        class: FrameworkExtensionBundle\Filesystem\UploadManager
+        arguments: [%public_dir%,@framework_extension.path_manager]
+
+    framework_extension.form.extension.image_type:
+        class: FrameworkExtensionBundle\Form\Extension\ImageTypeExtension
+        arguments: [%kernel.bundles%]
+        tags:
+            - { name: form.type_extension, alias: file }
+
+    framework_extension.form.extension.file_type:
+        class: FrameworkExtensionBundle\Form\Extension\DocumentFileExtension
+        tags:
+            - { name: form.type_extension, alias: file }
+

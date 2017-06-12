@@ -1,0 +1,29 @@
+UserBundle\Entity\User:
+    type:  entity
+    table: users
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        birthday:
+            type: datetime
+            nullable: true
+
+        avatarUrl:
+            type: string
+            nullable: true
+    oneToMany:
+        activities:
+            targetEntity: ActivityBundle\Entity\UserActivity
+            mappedBy: user
+    manyToMany:
+        badges:
+            targetEntity: ActivityBundle\Entity\Badge
+            mappedBy: users
+        correctQuestions:
+            targetEntity: ActivityBundle\Entity\UserQuestion
+            mappedBy: question
+

@@ -1,0 +1,8 @@
+LessonBundle\Entity\Language:
+    properties:
+        name:
+            - NotBlank: ~
+        logo:
+            - File:
+                maxSize: 8M
+                mimeTypes: [image/jpeg, image/png, image/jpg]

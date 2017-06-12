@@ -1,0 +1,25 @@
+LessonBundle\Entity\Language:
+    type:  entity
+    table: languages
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        name:
+            type: string
+            nullable: false
+        logoUrl:
+            type: string
+            nullable: true
+
+    oneToMany:
+        lessons:
+          targetEntity: LessonBundle\Entity\Lesson
+          mappedBy: language
+          orderBy: { 'chapter': 'ASC' }
+        badges:
+          targetEntity: ActivityBundle\Entity\Badge
+          mappedBy: language

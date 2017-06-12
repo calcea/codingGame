@@ -1,0 +1,10 @@
+LessonBundle\Entity\Lesson:
+    properties:
+        chapter:
+            - NotBlank: ~
+        content:
+            - NotBlank: ~
+        language:
+            - NotBlank: ~
+        score_to_unlock:
+            - NotBlank: ~

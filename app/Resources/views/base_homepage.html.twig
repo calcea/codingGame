@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+
+    {% block stylesheet_libs %}
+        {% stylesheets filter='cssrewrite' output='compiled/css/libs.css'
+        '@bootstrap'
+        '@jquery_ui_style'
+        '@owl'
+        '@slider'
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+
+    {% block stylesheets %}
+        {% stylesheets filter='cssrewrite' output='compiled/css/style.css'
+        'css/style.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ asset('fonts/css/font-awesome.css') }}">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+{% block header %}{% endblock %}
+{% block menu %}{% endblock %}
+{% block slider %}{% endblock %}
+
+<div class="main_bg"><!-- start main -->
+    <div class="container">
+        {% block admin_bar %}
+
+        {% endblock %}
+
+        {% block content %}{% endblock %}
+    </div>
+</div>
+{% include "::footer.html.twig" %}
+{% block javascript_libs %}
+    {% javascripts output='compiled/js/libs.js' filter="?jsqueeze"
+    '@jquery'
+    '@jquery_ui'
+    '@underscore'
+    '@backbone'
+    '@bootstrap_js'
+    '@modernizr'
+    '@cslider'
+    '@owl_js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+{% block javascripts %}
+    {% javascripts
+    'js/app.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+<script type="text/javascript">
+    $(function() {
+
+        $('#da-slider').cslider({
+            autoplay : true,
+            bgincrement : 450
+        });
+
+    });
+    $(document).ready(function() {
+
+        $("#owl-demo").owlCarousel({
+            items : 4,
+            lazyLoad : true,
+            autoPlay : true,
+            navigation : true,
+            navigationText : ["", ""],
+            rewindNav : false,
+            scrollPerPage : false,
+            pagination : false,
+            paginationNumbers : false,
+        });
+
+    });
+</script>
+</body>
+</html>

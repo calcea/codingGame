@@ -1,0 +1,4 @@
+services:
+#    admin_override.example:
+#        class: AdminOverrideBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

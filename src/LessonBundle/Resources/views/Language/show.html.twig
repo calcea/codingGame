@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block content %}
+
+    {% set lessons = language.getLessons() %}
+    {% if app.user is not null %}
+        {% set languageTotalScore = activityTracking.languageTotalScore(lessons[0].getLanguage(), app.user) %}
+    {% else %}
+        <div class="alert alert-danger">
+            Pentru a putea parcurge lectiile trebuie sa va <a href="{{ path('fos_user_security_login') }}">logati</a>
+                    sau sa va <a href="{{ path('fos_user_registration_register') }}">inregistrati</a>.
+        </div>
+    {% endif %}
+    <ul class="lessons">
+
+        {% for lesson in lessons %}
+            <li>
+                {% if app.user is null %}
+                    <div class="lesson">
+                        {{ lesson.getChapter() }} . {{ lesson.getTitle() }}
+                    </div>
+                {% elseif languageTotalScore < lesson.getScoreToUnlock() %}
+                    <div class="lesson-blocked" data-score_to_unlock="{{ lesson.getScoreToUnlock() }}"
+                         data-total_score="{{ languageTotalScore }}">
+                        <div class="lesson">
+                            {{ lesson.getChapter() }} . {{ lesson.getTitle() }}
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{{ path('lesson_bundle.show_lesson', {id: lesson.getId(), slugName:lesson.getTitle()|sonata_slugify}) }}">
+                        <div class="lesson">
+                            {{ lesson.getChapter() }} . {{ lesson.getTitle() }}
+                        </div>
+                    </a>
+                {% endif %}
+            </li>
+        {% endfor %}
+
+    </ul>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+    '@LessonBundle/Resources/public/js/views/LessonsList.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

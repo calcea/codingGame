@@ -1,0 +1,25 @@
+ActivityBundle\Entity\UserQuestion:
+      type: entity
+      table: user_question
+      id:
+          id:
+              type: integer
+              generator:
+                  strategy: AUTO
+
+      fields:
+          time:
+              type: datetime
+              nullable: false
+      manyToOne:
+          user:
+               targetEntity: UserBundle\Entity\User
+               inversedBy: correctQuestion
+               joinColumn:
+                  name: user_id
+                  referencedCol-umnName: id
+          question:
+                targetEntity: ExamBundle\Entity\Question
+                joinColumn:
+                  name: question_id
+                  referencedColumnName: id

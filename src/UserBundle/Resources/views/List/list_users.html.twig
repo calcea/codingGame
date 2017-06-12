@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="main row users">
+        {% for user in users %}
+            <div class="col-md-3 images_1_of_4 text-center user">
+                <span class="bg"><img src="{{ asset(user.avatarUrl) }}" height="120px" width="120px" class="img-circle"></span>
+                <h4>
+                    <a href="{{ path('user_bundle.show_user', {slugName: user.username|sonata_slugify, id: user.id}) }}">{{ user.username }}</a>
+                </h4>
+                <div class="info" data-badges="{{ badges[user.id] }}" data-xp="{{ xp[user.id] }}"></div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+    '@UserBundle/Resources/public/js/views/UsersList.js'
+%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

@@ -1,0 +1,21 @@
+services:
+  userbundle.user_entity_manager:
+          class: UserBundle\EntityManager\User
+          arguments: ['framework_extension.upload_manager']
+          tags:
+            - { name: doctrine.event_subscriber, connection: default }
+  userbundle.user_experience:
+          class: UserBundle\Services\UserXp
+          arguments: ['@doctrine']
+
+  userbundle.user_admin:
+          class: UserBundle\Admin\UserAdmin
+          arguments:
+            - ~
+            - UserBundle\Entity\User
+            - ~
+          tags:
+            - { name: sonata.admin, manager_type: orm, label: "User", group: "User" }
+          calls:
+            - [setTranslationDomain, [admin]]
+
